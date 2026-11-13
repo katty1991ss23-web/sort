@@ -1,0 +1,391 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #1e1e1e;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.widget {
+    width: min(1190px, 100%);
+    height: min(840px, calc(100vh - 40px));
+    min-height: 400px;
+    background: #2d2d2d;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* Верхня панель */
+
+.top-panel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+}
+
+input[type="file"] {
+    flex: 0 0 260px;
+    min-width: 180px;
+    max-width: 260px;
+    font-size: 13px;
+    color: #fff;
+}
+
+/* Контейнер вкладок */
+
+.file-tabs {
+    display: grid;
+    grid-template-columns: repeat(var(--tab-count, 1), minmax(0, 1fr));
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Окреме віконце документа */
+
+.file-tab-wrap {
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
+    height: 38px;
+    background: #1e1e1e;
+    border: 2px solid #444;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.file-tab-wrap:hover {
+    border-color: #777;
+}
+
+.file-tab-wrap.active {
+    border: 2px solid #4caf50;
+    background: #263326;
+    box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.2);
+}
+
+.file-tab {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: #aaa;
+    cursor: pointer;
+    padding: 0 10px;
+    text-align: left;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-tab-wrap.active .file-tab {
+    color: #a5d6a7;
+    font-weight: bold;
+}
+
+.file-tab:hover {
+    color: #fff;
+}
+
+.file-tab-name {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-tab-remove {
+    flex: 0 0 30px;
+    border: none;
+    border-left: 1px solid #444;
+    background: transparent;
+    color: #ff5252;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.file-tab-remove:hover {
+    background: #492626;
+    color: #ff1744;
+}
+
+/* Поле пошуку */
+
+.filter-input {
+    width: 100%;
+    background: #1e1e1e;
+    color: #fff;
+    border: 1px solid #4caf50;
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 15px;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: #81c784;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
+}
+
+.filter-input:disabled {
+    opacity: 0.6;
+}
+
+/* Область документа */
+
+.output-box {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    background: #1e1e1e;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.placeholder-text {
+    color: #777;
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Заголовки розділів */
+
+.section-header {
+    color: #81c784;
+    background: #252525;
+    border-left: 4px solid #4caf50;
+    border-bottom: 1px solid #444;
+    padding: 12px 14px;
+    margin: 22px 0 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.section-header:first-child {
+    margin-top: 0;
+}
+
+/* Рядки прайсу */
+
+.table-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 100px 120px;
+    align-items: center;
+    gap: 12px;
+    background: #252525;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+    border-radius: 4px;
+    border-left: 3px solid #4caf50;
+}
+
+.col-name {
+    min-width: 0;
+    font-size: 14px;
+    color: #e0e0e0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.col-unit {
+    text-align: center;
+    font-size: 13px;
+    color: #b0bec5;
+    background: #1e1e1e;
+    padding: 6px;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+}
+
+.col-price {
+    text-align: right;
+    font-size: 15px;
+    font-weight: bold;
+    color: #81c784;
+    background: #1a1a1a;
+    padding: 6px 9px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    overflow-wrap: anywhere;
+}
+
+/* Звичайні абзаци документа */
+
+.document-paragraph {
+    color: #ddd;
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 3px 4px;
+    margin: 5px 0 10px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* Рядки таблиць */
+
+.document-row {
+    display: grid;
+    grid-template-columns: repeat(var(--columns, 2), minmax(0, 1fr));
+    gap: 1px;
+    margin-bottom: 5px;
+    background: #444;
+    border: 1px solid #444;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.document-cell {
+    background: #252525;
+    padding: 9px 11px;
+    color: #ddd;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.document-row.is-header .document-cell {
+    background: #303b30;
+    color: #a5d6a7;
+    font-weight: bold;
+}
+
+/* Підсвічування пошуку */
+
+mark {
+    background: #66551b;
+    color: #fff2b3;
+    padding: 1px 2px;
+    border-radius: 2px;
+}
+
+/* Повідомлення */
+
+.no-results {
+    color: #ff8a80;
+    text-align: center;
+    padding: 30px 10px;
+    font-size: 14px;
+}
+
+.result-count {
+    color: #81c784;
+    font-size: 12px;
+    margin-bottom: 14px;
+}
+
+/* Мобільна адаптація */
+
+@media (max-width: 700px) {
+    body {
+        padding: 8px;
+    }
+
+    .widget {
+        height: calc(100vh - 16px);
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .top-panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    input[type="file"] {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .file-tabs {
+        width: 100%;
+        grid-template-columns: repeat(var(--tab-count, 1), minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .file-tab-wrap {
+        height: 36px;
+    }
+
+    .file-tab {
+        padding: 0 6px;
+        font-size: 11px;
+    }
+
+    .file-tab-remove {
+        flex-basis: 25px;
+    }
+
+    .output-box {
+        padding: 10px;
+    }
+
+    .table-row {
+        grid-template-columns: minmax(0, 1fr) 65px 85px;
+        gap: 6px;
+        padding: 9px 8px;
+    }
+
+    .col-name {
+        font-size: 12px;
+    }
+
+    .col-unit {
+        font-size: 11px;
+    }
+
+    .col-price {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    .section-header {
+        font-size: 14px;
+    }
+
+    .document-cell {
+        font-size: 11px;
+        padding: 7px;
+    }
+}
